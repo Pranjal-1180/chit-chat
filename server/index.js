@@ -32,7 +32,8 @@ const server = app.listen(process.env.PORT || 5000, () =>
 );
 const io = socket(server, {
   cors: {
-    origin: "https://chit-chat-estq.onrender.com",
+    // origin: "https://chit-chat-estq.onrender.com",
+    origin:"http://localhost:3000",
     credentials: true,
   },
 });
