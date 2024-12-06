@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 export default function App() {
   return (
+    // "homepage": "https://pranjal-1180.github.io/chit-chat",
     <BrowserRouter>
       <Routes>
         <Route path="/register" element={<Register />} />
