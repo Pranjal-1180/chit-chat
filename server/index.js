@@ -6,6 +6,7 @@ const messageRoutes = require("./routes/messages");
 const app = express();
 const socket = require("socket.io");
 require("dotenv").config();
+const path = require("path");
 
 app.use(cors());
 app.use(express.json());
@@ -21,6 +22,9 @@ mongoose
   .catch((err) => {
     console.log(err.message);
   });
+
+  // Serve static files from the React app (build folder)
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
@@ -48,4 +52,9 @@ io.on("connection", (socket) => {
       socket.to(sendUserSocket).emit("msg-recieve", data.msg);
     }
   });
+});
+
+// Catch-all handler to serve React app in production
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
